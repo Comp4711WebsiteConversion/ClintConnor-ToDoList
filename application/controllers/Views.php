@@ -10,19 +10,11 @@ class Views extends Application
         $this->data['pagetitle'] = 'Ordered TODO List';
         $tasks = $this->tasks->all();   // get all the tasks
         $this->data['content'] = 'Ok'; // so we don't need pagebody
-<<<<<<< HEAD
-        $this->data['leftside'] = 'by_priority';
-        $this->data['rightside'] = 'by_category';
-=======
         $this->data['leftside'] = $this->makePrioritizedPanel($tasks);
         $this->data['rightside'] = $this->makeCategorizedPanel($tasks);
->>>>>>> c9d8ece7265cdf68cbde04fcacf2b3da3cb86aa5
-
         $this->render('template_secondary');
     }
 
-<<<<<<< HEAD
-=======
     function makePrioritizedPanel($tasks)
     {
         $parms = ['display_tasks' => []];
@@ -69,5 +61,4 @@ function orderByPriority($a, $b)
         return 1;
     else
         return 0;
->>>>>>> c9d8ece7265cdf68cbde04fcacf2b3da3cb86aa5
 }
