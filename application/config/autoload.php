@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('parser', 'Parsedown');
+$autoload['libraries'] = array('parser', 'parsedown','session');
 
 /*
 | -------------------------------------------------------------------
