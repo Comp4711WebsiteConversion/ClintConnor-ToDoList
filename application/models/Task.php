@@ -15,7 +15,8 @@ class Task {
         $method = 'set' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $key)));
         if (method_exists($this, $method))
         {
-          return $this->$method($value);
+          $this->$method($value);
+          return $this;
         } else {
           // Otherwise, just set the property value directly.
            $this->$key = $value;
@@ -27,35 +28,23 @@ class Task {
     public function setTask($value){
       if (strlen($value) <= 64){
         $this ->task = $value;
-        return true;
-      }
-      else {
-        return false;
       }
     }
     public function setPriority($value){
       if(is_numeric($value)) {
         if ($value <=3 && $value >= 0){
-          $this->task = $value;
-          return true;
+          $this->priority = $value;
         }
       }
-      return false;
     }
     public function setSize($value){
       if (preg_match("/^[0-3]+$/", $value)){
-        $this->task = $value;
-      }
-      else {
-        throw new Exception("Task Incorrect", 1);
+        $this->size = $value;
       }
     }
     public function setGroup($value){
       if (preg_match("/^[0-4]+$/", $value)){
-        $this->task = $value;
-      }
-      else {
-        throw new Exception("Task Incorrect", 1);
+        $this->group = $value;
       }
     }
 }
