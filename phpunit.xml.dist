@@ -14,10 +14,7 @@
     verbose="false"
     bootstrap="tests/Bootstrap.php">
     <logging>
-    <log type="coverage-html" target="./log/codeCoverage" charset="UTF-8"
-            yui="true" highlight="true"
-            lowUpperBound="50" highLowerBound="80"/>
-        <log type="testdox-html" target="./log/testdox.html" />
+        <log type="testdox-html" target="./tests/testlogs/testdox.html" />
     </logging>
     <testsuites>
         <testsuite name="CITools Test Suite">
