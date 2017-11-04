@@ -19,3 +19,5 @@ application/logs/*
 
 tmp/*
 .idea
+
+/tests/testlogs
