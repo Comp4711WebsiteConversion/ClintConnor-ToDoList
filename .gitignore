@@ -19,6 +19,6 @@ application/logs/*
 
 tmp/*
 .idea
-log
+.log
 
 /tests/testlogs
