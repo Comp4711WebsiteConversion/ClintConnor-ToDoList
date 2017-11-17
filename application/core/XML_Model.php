@@ -59,17 +59,58 @@ class XML_Model extends Memory_Model
 	 */
 	protected function store()
 	{
-		// rebuild the keys table
-		$this->reindex();
-		//---------------------
-		if (($handle = fopen($this->_origin, "w")) !== FALSE)
+		$data = $this->_data;
+		
+		$xml = new DOMDocument('1.0', 'utf-8');
+		$xml->formatOutput = true;
+		$xml->preserveWhiteSpace = false;
+		$tasks = $xml->createElement('tasks');
+
+		foreach($data as $record)
 		{
-			fputcsv($handle, $this->_fields);
-			foreach ($this->_data as $key => $record)
-				fputcsv($handle, array_values((array) $record));
-			fclose($handle);
+			// Creating the xml for each field of task + appending them to a task element
+			$taskobj = $xml->createElement('task');
+			$id = $xml->createElement('id');
+			$id->appendChild($xml->createTextNode(isset($record->{'id'})? $record->{'id'} : ''));
+			$taskobj->appendChild($id);
+
+			$task = $xml->createElement('task');
+			$task->appendChild($xml->createTextNode(isset($record->{'task'})? $record->{'task'} : ''));
+			$taskobj->appendChild($task);
+
+			$priority = $xml->createElement('priority');
+			$priority->appendChild($xml->createTextNode(isset($record->{'priority'})? $record->{'priority'} : ''));
+			$taskobj->appendChild($priority);
+
+			$size = $xml->createElement('size');
+			$size->appendChild($xml->createTextNode(isset($record->{'size'})? $record->{'size'} : ''));
+			$taskobj->appendChild($size);
+
+			$group = $xml->createElement('group');
+			$group->appendChild($xml->createTextNode(isset($record->{'group'})? $record->{'group'} : ''));
+			$taskobj->appendChild($group);
+
+			$deadline = $xml->createElement('deadline');
+			$deadline->appendChild($xml->createTextNode(isset($record->{'deadline'})? $record->{'deadline'} : ''));
+			$taskobj->appendChild($deadline);
+
+			$status = $xml->createElement('status');
+			$status->appendChild($xml->createTextNode(isset($record->{'status'})? $record->{'status'} : ''));
+			$taskobj->appendChild($status);
+
+			$flag = $xml->createElement('flag');
+			$flag->appendChild($xml->createTextNode(isset($record->{'flag'})? $record->{'flag'} : ''));
+			$taskobj->appendChild($flag);
+			// Appending the task element to the dom
+			$tasks->appendChild($taskobj);
 		}
-		// --------------------
+
+		$xml->appendChild($tasks);
+		
+		$xml->saveXML($xml);
+		//$this->_xml
+		$xml->save('../data/tasks.xml');
+		
 	}
 
 }
